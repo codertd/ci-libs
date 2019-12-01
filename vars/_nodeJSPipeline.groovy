@@ -18,8 +18,10 @@ def call(body) {
         }
         stages {
             stage('Initialize Docker'){
+                script {
                     def dockerHome = tool 'myDocker'
                     env.PATH = "${dockerHome}/bin:${env.PATH}"
+                }
             }
             stage('Setup') {
                 agent {
