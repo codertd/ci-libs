@@ -8,7 +8,8 @@ def call(body) {
     body()
 
     pipeline {
-        agent any
+        // agent any
+        agent { label 'dockerserver' }
         options {
             buildDiscarder(logRotator(daysToKeepStr: '1', numToKeepStr: '10'))
             disableConcurrentBuilds()
@@ -30,6 +31,7 @@ def call(body) {
                 agent {
                     docker {
                         image "alpine/git"
+                        label 'dockerserver'  // both label and image
                     }
                 }
                 steps {
