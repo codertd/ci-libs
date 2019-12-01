@@ -50,10 +50,7 @@ def call(body) {
                 steps {
                     script {
                         sh "npm install"
-                    }
-                }
-                steps {
-                    script {
+
                         sh "npm run start"
                     }
                 }
