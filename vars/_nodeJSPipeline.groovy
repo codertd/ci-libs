@@ -21,7 +21,7 @@ def call(body) {
             stage('Initialize Docker'){
                 steps {
                     script {
-                        def dockerHome = tool 'myDocker'
+                        def dockerHome = tool 'docker'
                         env.PATH = "${dockerHome}/bin:${env.PATH}"
                         println "dockerHome: ${env.PATH}"
                     }
