@@ -17,6 +17,10 @@ def call(body) {
             TEST = "${body.test}"
         }
         stages {
+            stage('Initialize Docker'){
+                    def dockerHome = tool 'myDocker'
+                    env.PATH = "${dockerHome}/bin:${env.PATH}"
+            }
             stage('Setup') {
                 agent {
                     docker {
@@ -28,10 +32,6 @@ def call(body) {
                         println "Setting up!"
                     }
                 }
-            }
-            stage('Initialize'){
-                    def dockerHome = tool 'myDocker'
-                    env.PATH = "${dockerHome}/bin:${env.PATH}"
             }
         }
     }
