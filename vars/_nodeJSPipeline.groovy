@@ -43,7 +43,7 @@ def call(body) {
             stage('Npm Setup') {
                 agent {
                     docker {
-                        image "docker-node/10"
+                        image "node"
                         args '--entrypoint='
                     }
                 }
