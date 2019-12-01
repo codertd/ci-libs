@@ -27,16 +27,29 @@ def call(body) {
                     }
                 }
             }
-            stage('Setup') {
+            stage('Git Setup') {
                 agent {
                     docker {
                         image "alpine/git"
                         args '--entrypoint='
                     }
                 }
+            }
+            stage('Npm Setup') {
+                agent {
+                    docker {
+                        image "docker-node/10"
+                        args '--entrypoint='
+                    }
+                }
                 steps {
                     script {
-                        println "Setting up!"
+                        sh "npm install"
+                    }
+                }
+                steps {
+                    script {
+                        sh "npm run start"
                     }
                 }
             }
