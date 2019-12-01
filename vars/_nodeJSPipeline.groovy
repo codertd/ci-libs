@@ -8,7 +8,7 @@ def call(body) {
     body()
 
     pipeline {
-        agent none
+        agent any
         options {
             buildDiscarder(logRotator(daysToKeepStr: '1', numToKeepStr: '10'))
             disableConcurrentBuilds()
