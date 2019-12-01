@@ -34,6 +34,11 @@ def call(body) {
                         args '--entrypoint='
                     }
                 }
+                steps {
+                    script {
+                        println "Setting Up"
+                    }
+                }
             }
             stage('Npm Setup') {
                 agent {
