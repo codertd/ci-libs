@@ -39,7 +39,7 @@ def call(body) {
                     }
                 }
             }
-            stage('Npm Setup') {
+            stage('Unit Tests') {
                 agent {
                     docker {
                         image "node"
@@ -48,11 +48,9 @@ def call(body) {
                 }
                 steps {
                     script {
-                        sh "ls -alh"
-
                         sh "npm install"
 
-                        // sh "npm run start"
+                        sh "npm run test"
                     }
                 }
             }
