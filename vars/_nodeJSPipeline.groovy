@@ -21,9 +21,8 @@ def call(body) {
             stage('Initialize Docker'){
                 steps {
                     script {
-                        def dockerHome = tool 'docker'
+                        def dockerHome = tool 'docker' // This tool is setup via Jenkins server config.
                         env.PATH = "${dockerHome}:${env.PATH}"
-                        println "dockerHome: ${env.PATH}"
                     }
                 }
             }
@@ -49,9 +48,11 @@ def call(body) {
                 }
                 steps {
                     script {
+                        sh "ls -alh"
+
                         sh "npm install"
 
-                        sh "npm run start"
+                        // sh "npm run start"
                     }
                 }
             }
