@@ -22,7 +22,7 @@ def call(body) {
                 steps {
                     script {
                         def dockerHome = tool 'docker'
-                        // env.PATH = "${dockerHome}/bin:${env.PATH}"
+                        env.PATH = "${dockerHome}/bin:${env.PATH}"
                         println "dockerHome: ${env.PATH}"
                     }
                 }
