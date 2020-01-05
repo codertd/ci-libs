@@ -9,9 +9,12 @@ def call() {
 
     // Setup Docker tool and credentials for docker hub
     println "Configuring Docker environment"
+    env.DOCKER_ACCOUNT = 'codertd'
     env.registry = "codertd/${env.REPO_NAME}"
     env.registryCredentials = 'dockerhub'
     env.dockerServer = "https://hub.docker.com/"
+
+    env.dockerImageFull = "${env.DOCKER_ACCOUNT}/${env.REPO_NAME}:${env.BUILD_ID}"
 
     def dockerHome = tool 'docker' // This tool is setup via Jenkins server config.
     env.PATH = "${dockerHome}:${env.PATH}"
