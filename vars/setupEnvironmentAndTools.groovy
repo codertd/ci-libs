@@ -4,10 +4,7 @@
 
 def call() {
 
-    // GIT_URL
-    // BRANCH_NAME
-
-    // get the repo name
+    // get the repo name, its not automatically available from multibranch jenkins plugin.
     env.REPO_NAME = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
 
     // Setup Docker tool and credentials for docker hub
