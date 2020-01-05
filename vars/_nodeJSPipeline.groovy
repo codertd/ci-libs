@@ -48,6 +48,14 @@ def call(body) {
                     }
                 }
             }
+            stage('Build Docker image and publish'){
+                steps {
+                    script {
+                        sh 'docker build -t react-app:latest -f Dockerfile --no-cache .'
+
+                    }
+                }
+            }
         }
     }
 }
