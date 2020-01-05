@@ -55,9 +55,14 @@ def call(body) {
 
                         docker.withRegistry("${env.dockerServer}", "${env.registryCredentials}") {
                             def customImage = docker.build("${repoName}:${env.BUILD_ID}")
+
+                            // Push image up, and tag with latest if master.
                             customImage.push()
 
-                            customImage.push('latest')
+                            if (${env.BRANCH_NAME} == 'master') {
+                                println 'Master branch, tagging with latest'
+                                customImage.push('latest')
+                            }
                         }
                     }
                 }
