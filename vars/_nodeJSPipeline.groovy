@@ -54,9 +54,12 @@ def call(body) {
                         // sh 'docker build -t react-app:latest -f Dockerfile --no-cache .'
 
                         // docker.withRegistry("${env.dockerServer}", "${env.registryCredentials}") {
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub',
-                            usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-                            sh 'docker login -u "$USERNAME" -p "$PASSWORD"'
+                        //withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub',
+                        //    usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                        //    sh 'docker login -u "$USERNAME" -p "$PASSWORD"'
+                        withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
+                            // sh 'docker push brightbox/terraform:latest'
+                            // sh 'docker push brightbox/cli:latest'
 
                             def customImage = docker.build("${repoName}:${env.BUILD_ID}")
 
