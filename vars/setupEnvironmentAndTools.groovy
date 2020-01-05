@@ -10,7 +10,7 @@ def call() {
     env.PATH = "${dockerHome}:${env.PATH}"
 
     // Make sure the source code is available so we can Dockerize.
-    checkout scm
+    // checkout scm
 
     def execute_state=sh(returnStdout: true, script: 'ls -alh')
     println "$execute_state"
