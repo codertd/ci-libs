@@ -17,7 +17,7 @@ def call() {
     env.dockerServer = "https://hub.docker.com/"
 
     // What the image is that will be pushed to dockerhub
-    env.dockerImageFull = "${env.DOCKER_ACCOUNT}/${env.REPO_NAME}:${env.BUILD_ID}"
+    env.dockerImageFull = "${env.DOCKER_ACCOUNT}/${env.REPO_NAME}:${env.GIT_COMMIT}"
 
     def dockerHome = tool 'docker' // This tool is setup via Jenkins server config.
     env.PATH = "${dockerHome}:${env.PATH}"
