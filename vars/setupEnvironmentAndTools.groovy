@@ -9,6 +9,8 @@ def call() {
 
     // Setup Docker tool and credentials for docker hub
     println "Configuring Docker environment"
+
+    // Docker account could be passed in via the pipeline params or Jenkinsfile.
     env.DOCKER_ACCOUNT = 'codertd'
     env.registry = "codertd/${env.REPO_NAME}"
     env.registryCredentials = 'dockerhub'
