@@ -22,6 +22,4 @@ def call() {
     def execute_ls=sh(returnStdout: true, script: 'ls -alh')
     println "$execute_ls"
 
-    sh 'printenv'
-
 }
