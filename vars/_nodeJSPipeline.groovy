@@ -61,7 +61,7 @@ def call(body) {
                             // sh 'docker push brightbox/terraform:latest'
                             // sh 'docker push brightbox/cli:latest'
 
-                            def customImage = docker.build("${env.repoName}:${env.BUILD_ID}")
+                            def customImage = docker.build("${env.reREPO_NAME}:${env.BUILD_ID}")
 
                             // Push image up, and tag with latest if master.
                             customImage.push()
