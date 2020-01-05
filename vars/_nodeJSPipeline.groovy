@@ -51,8 +51,14 @@ def call(body) {
             stage('Build Docker image and publish'){
                 steps {
                     script {
-                        sh 'docker build -t react-app:latest -f Dockerfile --no-cache .'
+                        // sh 'docker build -t react-app:latest -f Dockerfile --no-cache .'
 
+                        docker.withRegistry("${env.dockerServer}", "${env.registryCredentials}") {
+                            def customImage = docker.build("${repoName}:${env.BUILD_ID}")
+                            customImage.push()
+
+                            customImage.push('latest')
+                        }
                     }
                 }
             }

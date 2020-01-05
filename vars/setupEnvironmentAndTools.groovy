@@ -4,15 +4,22 @@
 
 def call() {
 
-    // Setup Docker
+    // get the repo name
+    ${env.repoName} = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
+
+    // Setup Docker tool and credentials for docker hub
     println "Configuring Docker environment"
+    env.registry = "codertd/${env.repoName}"
+    env.registryCredentials = 'dockerhub'
+    env.dockerServer = "https://hub.docker.com/"
+
     def dockerHome = tool 'docker' // This tool is setup via Jenkins server config.
     env.PATH = "${dockerHome}:${env.PATH}"
 
-    // Make sure the source code is available so we can Dockerize.
-    // checkout scm
+    // See our source code directory.
+    def execute_ls=sh(returnStdout: true, script: 'ls -alh')
+    println "$execute_ls"
 
-    def execute_state=sh(returnStdout: true, script: 'ls -alh')
-    println "$execute_state"
+    sh 'printenv'
 
 }
