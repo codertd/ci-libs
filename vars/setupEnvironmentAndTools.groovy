@@ -9,16 +9,23 @@ def call() {
 
     // Setup Docker tool and credentials for docker hub
     println "Configuring Docker environment"
+
+    // Docker account could be passed in via the pipeline params or Jenkinsfile.
+    env.DOCKER_ACCOUNT = 'codertd'
     env.registry = "codertd/${env.REPO_NAME}"
     env.registryCredentials = 'dockerhub'
     env.dockerServer = "https://hub.docker.com/"
 
+    // What the image is that will be pushed to dockerhub
+    env.dockerImageFull = "${env.DOCKER_ACCOUNT}/${env.REPO_NAME}:${env.BUILD_ID}"
+
     def dockerHome = tool 'docker' // This tool is setup via Jenkins server config.
     env.PATH = "${dockerHome}:${env.PATH}"
+
+    // See our ENV available to be used
+    sh 'printenv'
 
     // See our source code directory.
     def execute_ls=sh(returnStdout: true, script: 'ls -alh')
     println "$execute_ls"
-
-    sh 'printenv'
 }

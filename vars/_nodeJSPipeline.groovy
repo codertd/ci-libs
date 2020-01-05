@@ -51,22 +51,15 @@ def call(body) {
             stage('Build Docker image and publish'){
                 steps {
                     script {
-                        // sh 'docker build -t react-app:latest -f Dockerfile --no-cache .'
-
-                        // docker.withRegistry("${env.dockerServer}", "${env.registryCredentials}") {
-                        //withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub',
-                        //    usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-                        //    sh 'docker login -u "$USERNAME" -p "$PASSWORD"'
                         withDockerRegistry([ credentialsId: "dockerhub", url: ""]) {
-                            // sh 'docker push brightbox/terraform:latest'
-                            // sh 'docker push brightbox/cli:latest'
 
-                            def customImage = docker.build("${env.repoName}:${env.BUILD_ID}")
+                            def customImage = docker.build(env.dockerImageFull)
 
                             // Push image up, and tag with latest if master.
                             customImage.push()
 
-                            if (${env.BRANCH_NAME} == 'master') {
+                            // Tag with latest if on master branch.
+                            if (env.BRANCH_NAME == 'master') {
                                 println 'Master branch, tagging with latest'
                                 customImage.push('latest')
                             }
