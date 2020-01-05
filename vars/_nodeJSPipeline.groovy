@@ -53,7 +53,11 @@ def call(body) {
                     script {
                         // sh 'docker build -t react-app:latest -f Dockerfile --no-cache .'
 
-                        docker.withRegistry("${env.dockerServer}", "${env.registryCredentials}") {
+                        // docker.withRegistry("${env.dockerServer}", "${env.registryCredentials}") {
+                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub',
+                            usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                            sh 'docker login -u "$USERNAME" -p "$PASSWORD"'
+
                             def customImage = docker.build("${repoName}:${env.BUILD_ID}")
 
                             // Push image up, and tag with latest if master.
