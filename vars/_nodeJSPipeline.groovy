@@ -32,7 +32,7 @@ def call(body) {
                 agent {
                     docker {
                         image "alpine/git"
-                        // args '--entrypoint='
+                        args '--entrypoint='
                     }
                 }
                 steps {
