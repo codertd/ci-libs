@@ -18,15 +18,16 @@ def call(body) {
             TEST = "${body.test}"
         }
         stages {
-            stage('Initialize Docker'){
-                steps {
-                    script {
-                        // def dockerHome = tool 'docker' // This tool is setup via Jenkins server config.
-                        // env.PATH = "${dockerHome}:${env.PATH}"
-                        // setupEnvironment()
-                    }
-                }
-            }
+            // stage('Initialize Docker'){
+            //     steps {
+            //         script {
+            //             // def dockerHome = tool 'docker' // This tool is setup via Jenkins server config.
+            //             // env.PATH = "${dockerHome}:${env.PATH}"
+            //             // setupEnvironment()
+            //             println "old"
+            //         }
+            //     }
+            // }
             stage('Setup') {
                 agent {
                     docker {
