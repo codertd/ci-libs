@@ -4,14 +4,15 @@
 
 def call() {
 
-    sh 'printenv'
+    // GIT_URL
+    // BRANCH_NAME
 
     // get the repo name
-    env.repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
+    env.REPO_NAME = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
 
     // Setup Docker tool and credentials for docker hub
     println "Configuring Docker environment"
-    env.registry = "codertd/${env.repoName}"
+    env.registry = "codertd/${env.REPO_NAME}"
     env.registryCredentials = 'dockerhub'
     env.dockerServer = "https://hub.docker.com/"
 
@@ -22,4 +23,5 @@ def call() {
     def execute_ls=sh(returnStdout: true, script: 'ls -alh')
     println "$execute_ls"
 
+    sh 'printenv'
 }
