@@ -62,13 +62,13 @@ def call(body) {
                             // sh 'docker push brightbox/terraform:latest'
                             // sh 'docker push brightbox/cli:latest'
 
-                            println "${env.dockerImageFull}"
-                            def customImage = docker.build("${env.dockerImageFull}")
+                            println "env.dockerImageFull"
+                            def customImage = docker.build(env.dockerImageFull)
 
                             // Push image up, and tag with latest if master.
                             customImage.push()
 
-                            if (${env.BRANCH_NAME} == 'master') {
+                            if (env.BRANCH_NAME == 'master') {
                                 println 'Master branch, tagging with latest'
                                 customImage.push('latest')
                             }
