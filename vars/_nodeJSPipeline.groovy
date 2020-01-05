@@ -23,20 +23,21 @@ def call(body) {
                     script {
                         // def dockerHome = tool 'docker' // This tool is setup via Jenkins server config.
                         // env.PATH = "${dockerHome}:${env.PATH}"
-                        setupEnvironment()
+                        // setupEnvironment()
                     }
                 }
             }
-            stage('Git Setup') {
+            stage('Setup') {
                 agent {
                     docker {
                         image "alpine/git"
-                        args '--entrypoint='
+                        // args '--entrypoint='
                     }
                 }
                 steps {
                     script {
-                        println "Setting Up"
+                        // println "Setting Up"
+                        setupEnvironment()
                     }
                 }
             }
