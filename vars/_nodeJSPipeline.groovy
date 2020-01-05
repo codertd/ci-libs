@@ -53,7 +53,6 @@ def call(body) {
                     script {
                         withDockerRegistry([ credentialsId: "dockerhub", url: ""]) {
 
-                            println "env.dockerImageFull"
                             def customImage = docker.build(env.dockerImageFull)
 
                             // Push image up, and tag with latest if master.
