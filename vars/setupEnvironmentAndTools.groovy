@@ -4,8 +4,10 @@
 
 def call() {
 
+    sh 'printenv'
+
     // get the repo name
-    ${env.repoName} = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
+    env.repoName = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
 
     // Setup Docker tool and credentials for docker hub
     println "Configuring Docker environment"
