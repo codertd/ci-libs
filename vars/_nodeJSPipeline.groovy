@@ -57,11 +57,12 @@ def call(body) {
                         //withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub',
                         //    usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
                         //    sh 'docker login -u "$USERNAME" -p "$PASSWORD"'
-                        withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
+                        withDockerRegistry([ credentialsId: "dockerhub", url: "",
+                            usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
                             // sh 'docker push brightbox/terraform:latest'
                             // sh 'docker push brightbox/cli:latest'
 
-                            def customImage = docker.build("${repoName}:${env.BUILD_ID}")
+                            def customImage = docker.build("${env.repoName}:${env.BUILD_ID}")
 
                             // Push image up, and tag with latest if master.
                             customImage.push()
